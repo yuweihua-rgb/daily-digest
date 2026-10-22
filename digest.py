@@ -18,12 +18,15 @@ FEEDS = [
     ("TechCrunch", "https://techcrunch.com/feed/"),
     ("CNBC", "https://www.cnbc.com/id/100003114/device/rss/rss.html"),
     ("TechCrunch Fintech", "https://techcrunch.com/category/fintech/feed/"),
-    ("Harvard Business Review", "https://feeds.hbr.org/harvardbusiness"),
     ("科技新報", "https://technews.tw/feed/"),
-    ("INSIDE", "https://www.inside.com.tw/feed"),
-    ("數位時代", "https://www.bnext.com.tw/rss"),
+    ("自由時報 政治", "https://news.ltn.com.tw/rss/politics.xml"),
+    ("自由時報 社會", "https://news.ltn.com.tw/rss/society.xml"),
+    ("自由時報 財經", "https://news.ltn.com.tw/rss/business.xml"),
+    ("公視新聞網", "https://news.pts.org.tw/xml/newsfeed.xml"),
+    ("報導者", "https://www.twreporter.org/a/rss2.xml"),
+    ("Taipei Times", "https://www.taipeitimes.com/xml/index.rss"),
 ]
-MAX_PER_FEED = 6      # 每個來源最多取幾篇
+MAX_PER_FEED = 8      # 每個來源最多取幾篇
 HOURS = 24            # 只取過去幾小時內的文章
 DESC_LIMIT = 300      # 每篇摘錄最多幾個字元
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
