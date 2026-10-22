@@ -26,7 +26,7 @@ FEEDS = [
 MAX_PER_FEED = 6      # 每個來源最多取幾篇
 HOURS = 24            # 只取過去幾小時內的文章
 DESC_LIMIT = 300      # 每篇摘錄最多幾個字元
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 # =====================================================
 
 PROMPT = """以下是過去 24 小時來自多個來源的新文章，格式為「[來源] 標題 | 連結 | 摘要」。
