@@ -25,8 +25,14 @@ FEEDS = [
     ("公視新聞網", "https://news.pts.org.tw/xml/newsfeed.xml"),
     ("報導者", "https://www.twreporter.org/a/rss2.xml"),
     ("Taipei Times", "https://www.taipeitimes.com/xml/index.rss"),
+    ("ARTnews", "https://www.artnews.com/feed/"),
+    ("Artnet News", "https://news.artnet.com/feed"),
+    ("Hyperallergic", "https://hyperallergic.com/feed/"),
+    ("Artforum 新聞", "https://www.artforum.com/c/news/feed"),
+    ("Guardian 藝術與設計", "https://www.theguardian.com/artanddesign/rss"),
+    ("Colossal", "https://www.thisiscolossal.com/feed/"),
 ]
-MAX_PER_FEED = 8      # 每個來源最多取幾篇
+MAX_PER_FEED = 5      # 每個來源最多取幾篇
 HOURS = 24            # 只取過去幾小時內的文章
 DESC_LIMIT = 300      # 每篇摘錄最多幾個字元
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
@@ -36,7 +42,7 @@ PROMPT = """以下是過去 24 小時來自多個來源的新文章，格式為�
 請用繁體中文整理成每日產業簡報：
 
 1.【今日最重要 3 則】各 2 句說明重點與為何重要，附連結
-2.【分類摘要】依主題分為：供應鏈與製造、科技與新創、金融科技與財經、管理與商業、台灣在地動態。每則 1–2 句，附連結
+2.【分類摘要】依主題分為：供應鏈與製造、科技與新創、金融科技與財經、管理與商業、台灣在地動態、藝術與文化。每則 1–2 句，附連結
 3. 重複報導同一事件的只保留一則
 4. 英文內容請翻譯成繁體中文，專有名詞保留英文
 5. 最後加一行【今日觀察】，用 1–2 句總結整體趨勢
