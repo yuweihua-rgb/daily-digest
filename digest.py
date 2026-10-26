@@ -121,7 +121,6 @@ def send_email(subject: str, body_md: str) -> None:
         server.login(sender, password)
         server.sendmail(sender, [recipient], msg.as_string())
 
-
 def main() -> None:
     articles = fetch_articles()
     if not articles.strip():
@@ -138,5 +137,8 @@ def main() -> None:
         subject = f"每日產業簡報（原始清單）{today}"
     send_email(subject, summary)
     print("已寄出。")
-   if __name__ == "__main__":
-       main()
+
+
+if __name__ == "__main__":
+    main()
+
