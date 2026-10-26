@@ -92,7 +92,7 @@ def fetch_articles() -> str:
 def summarize(articles: str) -> str:
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     last_error = None
-    for attempt in range(3):
+    for attempt in range(5):
         try:
             resp = client.models.generate_content(
                 model=MODEL, contents=PROMPT.format(articles=articles)
@@ -101,7 +101,7 @@ def summarize(articles: str) -> str:
         except Exception as ex:
             last_error = ex
             print(f"Gemini 呼叫失敗（第 {attempt + 1} 次）：{ex}")
-            time.sleep(10 * (attempt + 1))
+            time.sleep(30 * (attempt + 1))
     raise RuntimeError(f"Gemini 連續失敗：{last_error}")
 
 
@@ -127,11 +127,14 @@ def main() -> None:
     if not articles.strip():
         print("過去 24 小時沒有新文章，今天不寄信。")
         return
-    summary = summarize(articles)
     today = datetime.now(ZoneInfo("Asia/Taipei")).strftime("%Y-%m-%d")
-    send_email(f"每日產業簡報 {today}", summary)
-    print("已寄出摘要。")
-
-
-if __name__ == "__main__":
-    main()
+    try:
+        summary = summarize(articles)
+        subject = f"每日產業簡報 {today}"
+    except Exception as ex:
+        print(f"摘要失敗，改寄原始文章清單：{ex}")
+        items = "\n".join(f"- {line}" for line in articles.splitlines())
+        summary = "今天 AI 摘要暫時無法使用，以下是原始文章清單：\n\n" + items
+        subject = f"每日產業簡報（原始清單）{today}"
+    send_email(subject, summary)
+    print("已寄出。")
