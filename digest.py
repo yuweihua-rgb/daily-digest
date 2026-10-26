@@ -138,3 +138,5 @@ def main() -> None:
         subject = f"每日產業簡報（原始清單）{today}"
     send_email(subject, summary)
     print("已寄出。")
+   if __name__ == "__main__":
+       main()
