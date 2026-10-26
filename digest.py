@@ -88,7 +88,6 @@ def fetch_articles() -> str:
             print(f"[錯誤] {name} 抓取失敗：{ex}")
     return "\n".join(lines)
 
-
 def summarize(articles: str) -> str:
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     last_error = None
@@ -137,7 +136,6 @@ def main() -> None:
         subject = f"每日產業簡報（原始清單）{today}"
     send_email(subject, summary)
     print("已寄出。")
-
 
 if __name__ == "__main__":
     main()
