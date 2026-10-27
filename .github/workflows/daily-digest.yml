@@ -8,6 +8,7 @@ on:
 
 jobs:
   digest:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run digest
-        run: python digest.py
+        run: python -u digest.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
