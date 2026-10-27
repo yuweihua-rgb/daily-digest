@@ -111,7 +111,7 @@ def summarize(articles: str) -> str:
             except Exception as ex:
                 last_error = ex
                 print(f"Gemini 呼叫失敗（{model}，第 {attempt + 1} 次）：{ex}")
-                if "404" in str(ex) or "NOT_FOUND" in str(ex):
+                if "404" in str(ex) or "NOT_FOUND" in str(ex) or "429" in str(ex):
                     break  # 模型名稱不存在，直接換下一個
                 if attempt < 3:
                     time.sleep(30 * (attempt + 1))
