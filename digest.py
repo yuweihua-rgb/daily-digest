@@ -2,6 +2,7 @@ import os
 import re
 import html
 import time
+import socket
 import smtplib
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
@@ -13,6 +14,7 @@ import markdown
 from google import genai
 
 # ====== 設定區：想改來源、篇數、時間範圍就改這裡 ======
+socket.setdefaulttimeout(20)
 FEEDS = [
     ("Supply Chain Dive", "https://www.supplychaindive.com/feeds/news/"),
     ("TechCrunch", "https://techcrunch.com/feed/"),
