@@ -39,8 +39,7 @@ HOURS = 24            # 只取過去幾小時內的文章
 DESC_LIMIT = 300      # 每篇摘錄最多幾個字元
 MODELS = [
     os.environ.get("GEMINI_MODEL", "gemini-3.8-flash"),  # 主要模型
-    "gemini-2.5-flash",                                   # 備用 1
-    "gemini-2.5-flash-lite",                              # 備用 2
+    "gemini-3.5-flash-lite",                             # 備用 1
 ]
 # =====================================================
 
@@ -99,7 +98,7 @@ def summarize(articles: str) -> str:
     prompt = PROMPT.format(articles=articles)
     last_error = None
     for model in MODELS:
-        for attempt in range(3):
+        for attempt in range(4):
             try:
                 resp = client.models.generate_content(model=model, contents=prompt)
                 if resp.text:
@@ -111,8 +110,8 @@ def summarize(articles: str) -> str:
                 print(f"Gemini 呼叫失敗（{model}，第 {attempt + 1} 次）：{ex}")
                 if "404" in str(ex) or "NOT_FOUND" in str(ex):
                     break  # 模型名稱不存在，直接換下一個
-                if attempt < 2:
-                    time.sleep(20 * (attempt + 1))
+                if attempt < 3:
+                    time.sleep(30 * (attempt + 1))
     raise RuntimeError(f"所有模型都失敗：{last_error}")
 
 def send_email(subject: str, body_md: str) -> None:
