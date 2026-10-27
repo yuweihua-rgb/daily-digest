@@ -94,7 +94,10 @@ def fetch_articles() -> str:
     return "\n".join(lines)
 
 def summarize(articles: str) -> str:
-    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+    client = genai.Client(
+        api_key=os.environ["GEMINI_API_KEY"],
+        http_options={"timeout": 120000},
+    )
     prompt = PROMPT.format(articles=articles)
     last_error = None
     for model in MODELS:
